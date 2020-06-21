@@ -4,9 +4,11 @@ import './App.css';
 
 const Board = lazy( async () => await import('./components/Board/Board'));
 
+//Unesessary Code Splitting as the application isn't big enough to really utilize the resourcfulness of code splitting.
+
 const App = () => {
   return (
-    <Suspense className="App" fallback={<div>...Loading</div>}>
+    <Suspense className="App" fallback={<div>Loading...</div>}>
       <div className="title">
         <h1>Task Management Board</h1>
       </div>
