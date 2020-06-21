@@ -13,3 +13,7 @@ If you want, you can use a style guide of choice (Material Design, Ant Design, e
 - User can re-arrange the order of the Cards in a Column
 - User can also move a Card from one column to another
 - User can also edit the Names of the Columns by clicking on the Name
+
+### How to run:
+- Make sure to install all dependencies with `npm install`
+- Run `npm start` to see a Create-React-App running in the browser.
