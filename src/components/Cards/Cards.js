@@ -4,7 +4,7 @@ import { Draggable } from 'react-beautiful-dnd';
 import { EditOutlined } from '@ant-design/icons';
 import EditCardModal from '../EditCardModal/EditCardModal';
 
-const Cards = ({ provided, snapshot, column, setColumns, columns, columnId }) => {
+const Cards = ({ provided, snapshot, column, setBoard, board, columnId }) => {
   const editIcons = useRef(new Array(column.items.length));
 
   const handleEdit = (event, index) => {
@@ -13,7 +13,7 @@ const Cards = ({ provided, snapshot, column, setColumns, columns, columnId }) =>
     newItemsArr[index]['mode'] = 'editing';
     
     const newColumn = { ...column, items: newItemsArr };
-    setColumns({ ...columns, [columnId]: newColumn });
+    setBoard({ ...board, [columnId]: newColumn });
   }
 
   return (
@@ -73,7 +73,7 @@ const Cards = ({ provided, snapshot, column, setColumns, columns, columnId }) =>
               );
             }}
           </Draggable>
-        ) : <EditCardModal currentColumn={columnId} index={index} item={item} columns={columns} setColumns={setColumns}/>;
+        ) : <EditCardModal currentColumn={columnId} index={index} item={item} board={board} setBoard={setBoard}/>;
       })}
       {provided.placeholder}
     </div>

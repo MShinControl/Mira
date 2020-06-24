@@ -4,7 +4,7 @@ import { Droppable } from "react-beautiful-dnd";
 import Cards from '../Cards/Cards';
 import { CheckCircleOutlined, CloseCircleOutlined } from '@ant-design/icons';
 
-const Column = ({ addCard, columnId, column, columns, setColumns }) => {
+const Column = ({ addCard, columnId, column, board, setBoard }) => {
 
   const [open, setOpen] = useState(false);
   const [columnName, setColumnName] = useState(column.name)
@@ -18,7 +18,7 @@ const Column = ({ addCard, columnId, column, columns, setColumns }) => {
     event.preventDefault();
     const newColumn = column;
     newColumn.name = columnName;
-    setColumns({...columns, [columnId]: newColumn })
+    setBoard({...board, [columnId]: newColumn })
     setOpen(false);
   }
 
@@ -46,7 +46,7 @@ const Column = ({ addCard, columnId, column, columns, setColumns }) => {
 
       <div>
         <Droppable droppableId={columnId} key={columnId}>
-          {(provided, snapshot) => <Cards column={column} columnId={columnId} columns={columns} provided={provided} snapshot={snapshot} setColumns={setColumns}/>}
+          {(provided, snapshot) => <Cards column={column} columnId={columnId} board={board} provided={provided} snapshot={snapshot} setBoard={setBoard}/>}
         </Droppable>
         <button
           className="add-btn"

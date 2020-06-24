@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const AddCardModal = ({ currentColumn, columns, setColumns, setOpen }) => {
+const AddCardModal = ({ currentColumn, board, setBoard, setOpen }) => {
   const initialContent = { 
     id: uuidv4(), 
     content: '',
@@ -35,14 +35,14 @@ const AddCardModal = ({ currentColumn, columns, setColumns, setOpen }) => {
 
   const handleSubmit = event => {
     event.preventDefault();
-    const items = columns[currentColumn].items;
+    const items = board[currentColumn].items;
     items.push(content);
 
     const newColumn = {
-      name: columns[currentColumn].name,
+      name: board[currentColumn].name,
       items
     }
-    setColumns({...columns, [currentColumn]: newColumn});
+    setBoard({...board, [currentColumn]: newColumn});
 
     setOpen(false);
   }

@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import './EditCardModal.css';
-import { makeStyles } from '@material-ui/core/styles';
-import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
@@ -16,7 +14,7 @@ import Select from '@material-ui/core/Select';
 //   },
 // }));
 
-const EditCardModal = ({ item, index, currentColumn, columns, setColumns }) => {
+const EditCardModal = ({ item, index, currentColumn, board, setBoard }) => {
   // const classes = useStyles();
   const initialItem = {...item}
 
@@ -31,24 +29,24 @@ const EditCardModal = ({ item, index, currentColumn, columns, setColumns }) => {
     event.preventDefault();
     event.stopPropagation();
     console.log('hellooo')
-    const newItemsArr = [...columns[currentColumn].items];
+    const newItemsArr = [...board[currentColumn].items];
     newItemsArr[index] = newItem;
     newItemsArr[index]['mode'] = null;
-    const newColumn = {...columns[currentColumn], items: newItemsArr};
-    setColumns({...columns, [currentColumn]: newColumn});
+    const newColumn = {...board[currentColumn], items: newItemsArr};
+    setBoard({...board, [currentColumn]: newColumn});
   }
 
   const handleCancel = () => {
-    const newItemsArr = [...columns[currentColumn].items];
+    const newItemsArr = [...board[currentColumn].items];
     newItemsArr[index]['mode'] = null;
-    const newColumn = {...columns[currentColumn], items: newItemsArr};
-    setColumns({...columns, [currentColumn]: newColumn});
+    const newColumn = {...board[currentColumn], items: newItemsArr};
+    setBoard({...board, [currentColumn]: newColumn});
   }
 
   const handleDelete = () => {
-    const newItemsArr = [...columns[currentColumn].items].filter((el, i) => i !== index);
-    const newColumn = {...columns[currentColumn], items: newItemsArr};
-    setColumns({...columns, [currentColumn]: newColumn});
+    const newItemsArr = [...board[currentColumn].items].filter((el, i) => i !== index);
+    const newColumn = {...board[currentColumn], items: newItemsArr};
+    setBoard({...board, [currentColumn]: newColumn});
   }
 
   return (

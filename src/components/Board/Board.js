@@ -33,7 +33,7 @@ const columnsFromBackend = {
 
 
 const Board = () => {
-  const [ columns, setColumns ] = useState(columnsFromBackend);
+  const [ board, setBoard ] = useState(columnsFromBackend);
   const [ open, setOpen ] = useState(false);
   const [ currentColumn, setCurrentColumn ] = useState(null);
 
@@ -43,15 +43,15 @@ const Board = () => {
   
     if (source.droppableId !== destination.droppableId) {
 
-      const sourceColumn = columns[source.droppableId];
-      const destColumn = columns[destination.droppableId];
+      const sourceColumn = board[source.droppableId];
+      const destColumn = board[destination.droppableId];
       const sourceItems = [...sourceColumn.items];
       const destItems = [...destColumn.items];
       const [removed] = sourceItems.splice(source.index, 1);
       destItems.splice(destination.index, 0, removed);
 
-      setColumns({
-        ...columns,
+      setBoard({
+        ...board,
         [source.droppableId]: {
           ...sourceColumn,
           items: sourceItems
@@ -63,13 +63,13 @@ const Board = () => {
       });
 
     } else {
-      const column = columns[source.droppableId];
+      const column = board[source.droppableId];
       const copiedItems = [...column.items];
       const [removed] = copiedItems.splice(source.index, 1);
       copiedItems.splice(destination.index, 0, removed);
 
-      setColumns({
-        ...columns,
+      setBoard({
+        ...board,
         [source.droppableId]: {
           ...column,
           items: copiedItems
@@ -89,17 +89,17 @@ const Board = () => {
       {open ? (
         <div>
           <div className="overlay"></div>
-          <AddCardModal setOpen={setOpen} currentColumn={currentColumn} columns={columns} setColumns={setColumns}/>
+          <AddCardModal setOpen={setOpen} currentColumn={currentColumn} board={board} setBoard={setBoard}/>
         </div>
       ) : null}
       
       <DragDropContext
         onDragEnd={result => onDragEnd(result)}
       >
-        {Object.entries(columns).map(([columnId, column]) => {
+        {Object.entries(board).map(([columnId, column]) => {
           return (
             <div className="columns">
-              <Column key={columnId} addCard={addCard} columnId={columnId} column={column} columns={columns} setColumns={setColumns}/>
+              <Column key={columnId} addCard={addCard} columnId={columnId} column={column} board={board} setBoard={setBoard}/>
             </div>
           ) 
         })}
